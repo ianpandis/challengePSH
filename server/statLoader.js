@@ -6,8 +6,9 @@ import axios from "axios";
  */
 export function statLoaderProcess() {
   setInterval(() => {
+    console.log("Arranca el proceso statLoaderProcess");
     statLoader();
-  }, 5 * 60 * 1000);
+  }, 1 * 30 * 1000);
 }
 
 /**
@@ -15,8 +16,11 @@ export function statLoaderProcess() {
  */
 export async function statLoader() {
   const number_of_players = randomIntFromInterval(0, 10);
+  console.log(`Se generan ${number_of_players} players}`);
   if (number_of_players === 0) return;
   let players = await getPlayers(number_of_players);
+  console.log("Consoleo los players");
+  console.log(players);
   insertPlayerStats(players);
 }
 
@@ -54,7 +58,7 @@ function insertPlayerStats(players) {
       "insert into player (nickname, image) VALUES (?,?) on duplicate key update image = ?;",
       [player.nickname, player.picture, player.picture],
       (error) => {
-        if (error) throw error;
+        if (error) console.log(error);
       }
     );
 

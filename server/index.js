@@ -17,16 +17,18 @@ app.use(express.json());
  */
 export const db = mysql.createConnection({
   user: "root",
-  host: "localhost",
+  host: process.env.DB_HOST,
   password: "secret",
   database: "psh_challenge",
 });
+
 db.connect(function (err) {
   if (err) {
     console.error("error connecting: " + err.stack);
-    return;
+    process.exit(0);
   }
 });
+
 db.query(
   "create table if not exists stat ( id int auto_increment primary key, player_nickname varchar(100) not null , score tinyint not null , ts timestamp default current_timestamp()) charset=utf8;",
   (error) => {
@@ -42,7 +44,7 @@ db.query(
 
 app.get("/stats", (req, res) => {
   if (cache.has(1)) {
-    console.log(cache.get(1));
+    // console.log(cache.get(1));
     return res.status(200).json(cache.get(1));
   }
 });
@@ -50,10 +52,6 @@ app.get("/stats", (req, res) => {
 app.listen(3001, () => {
   console.log("Server running on port 3001");
 });
-
-/**
- * Start generation of
- */
 
 statLoader();
 setTimeout(() => {

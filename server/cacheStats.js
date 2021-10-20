@@ -5,8 +5,9 @@ export const cache = new NodeCache({ stdTTL: 300 });
 
 export function saveDataInCacheProcess() {
   setInterval(() => {
+    console.log("Arranca el proceso saveDataInCacheProcess");
     saveDataInCache();
-  }, 5 * 60 * 1000);
+  }, 1 * 30 * 1000);
 }
 
 export function saveDataInCache() {
@@ -16,6 +17,10 @@ export function saveDataInCache() {
       if (error) {
         console.log(error);
       } else {
+        console.log(
+          "CONSOLEO RESULTADO DEL SELECT DE LAS TABLAS STATS Y PLAYERS"
+        );
+        console.log(result);
         const lastUpdate = currentDateTime();
         cache.set(1, { stats: result, lastUpdate: lastUpdate });
       }
