@@ -2,14 +2,14 @@ import axios, { AxiosResponse } from "axios";
 /**
  * Creates an api client to interact with the backend. */
 
-interface StatsType {
-  picture: string;
-  nickname: string;
-  score: number;
-}
+// interface StatsType {
+//   picture: string;
+//   nickname: string;
+//   score: number;
+// }
 
 const apiClient = axios.create({
-  baseURL: "localhost:3000/",
+  baseURL: "http://localhost:3001/",
   timeout: 10000,
 });
 
@@ -20,5 +20,23 @@ export const getStats: () => Promise<any> = async () => {
   } catch (error) {
     return [];
   }
-  return res.data;
+  // console.log(res.data);
+  return formatResponse(res.data);
 };
+
+function formatResponse(data: any) {
+  if (data.stats.lenght === 0) return [];
+  for (let i = 0; i < data.stats.length; i++) {
+    const player = data.stats[i];
+    player.rank = i + 1;
+    player.ts = formatTS(player.ts);
+  }
+  return data;
+}
+
+function formatTS(timestamp: string) {
+  let tsAux = timestamp.split("T");
+  let date = tsAux[0];
+  let time = tsAux[1].split(".")[0];
+  return `${date} ${time}`;
+}

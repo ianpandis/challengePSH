@@ -1,9 +1,0 @@
-.stat-table-header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.stat-table-header-container .stat-table-header-field {
-  flex: 0 0 30px;
-}
