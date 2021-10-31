@@ -8,7 +8,7 @@ export function statLoaderProcess() {
   setInterval(() => {
     console.log("Arranca el proceso statLoaderProcess");
     statLoader();
-  }, 1 * 30 * 1000);
+  }, 5 * 60 * 1000);
 }
 
 /**
@@ -31,6 +31,7 @@ export async function statLoader() {
  */
 async function getPlayers(number_of_players) {
   let players = [];
+
   for (let i = 0; i < number_of_players; i++) {
     await axios
       .get("https://randomuser.me/api")

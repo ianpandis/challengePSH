@@ -20,7 +20,6 @@ export function saveDataInCache() {
         console.log(
           "CONSOLEO RESULTADO DEL SELECT DE LAS TABLAS STATS Y PLAYERS"
         );
-        console.log(result);
         const lastUpdate = currentDateTime();
         cache.set(1, { stats: result, lastUpdate: lastUpdate });
       }

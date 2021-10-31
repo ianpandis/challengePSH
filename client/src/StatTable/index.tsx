@@ -33,13 +33,10 @@ const StatTable: React.FunctionComponent<IStatTableProps> = (props) => {
     return () => clearInterval(interval);
   });
 
-  const fetchStats = () => {
-    async function _fetchStats() {
-      const data = await getStats();
-      setStats(data.stats);
-      setLastUpdate(data.lastUpdate);
-    }
-    _fetchStats();
+  const fetchStats = async () => {
+    const data = await getStats();
+    setStats(data.stats);
+    setLastUpdate(data.lastUpdate);
   };
 
   const exportToCSV = () => {

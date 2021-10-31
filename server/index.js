@@ -44,7 +44,6 @@ db.query(
 
 app.get("/stats", (req, res) => {
   if (cache.has(1)) {
-    // console.log(cache.get(1));
     return res.status(200).json(cache.get(1));
   }
 });

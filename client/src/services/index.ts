@@ -20,7 +20,6 @@ export const getStats: () => Promise<any> = async () => {
   } catch (error) {
     return [];
   }
-  // console.log(res.data);
   return formatResponse(res.data);
 };
 
